@@ -1,6 +1,10 @@
 @extends('Dashboard.home')
 @section('Content')
+@if (session('status'))
+
+
     <nav class="navbar">
+
         <a href="#" class="sidebar-toggler">
             <i data-feather="menu"></i>
         </a>
@@ -393,7 +397,10 @@
         <p class="text-muted">Handcrafted With <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i></p>
     </footer>
     <!-- partial -->
-
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
     </div>
     </div>
+    </div>
+    @endif
 @endsection

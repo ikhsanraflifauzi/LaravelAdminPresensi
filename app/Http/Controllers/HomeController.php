@@ -32,7 +32,7 @@ class HomeController extends Controller
       try {
         $uid = Session::get('uid');
         $user = app('firebase.auth')->getUser($uid);
-        return view('home');
+        return view('Dashboard.home');
       } catch (\Exception $e) {
         return $e;
       }

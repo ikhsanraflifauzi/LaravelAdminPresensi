@@ -1,8 +1,4 @@
 
-
-
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -44,14 +40,15 @@
 </head>
 
 <body>
+
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
         @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
         <nav class="sidebar active">
             <div class="sidebar-header">
                 <a href="#" class="sidebar-brand">
@@ -67,7 +64,7 @@
                 <ul class="nav">
                     <li class="nav-item nav-category">Main</li>
                     <li class="nav-item">
-                        <a href="/Dashboard/dashboard" class="nav-link">
+                        <a href="/Dashboard/home" class="nav-link">
                             <i class="link-icon" data-feather="box"></i>
                             <span class="link-title">Dashboard</span>
                         </a>
@@ -100,13 +97,17 @@
                 </ul>
             </div>
         </nav>
-        <div class="page-wrapper">
-            @yield('Content')
-            @yield('DataPresensi')
-            @yield('DataAbsen')
-            @yield('DataUser')
-            @yield('Datagetpass')
-        </div>
+
+                            <div class="page-wrapper">
+                                @yield('Content')
+                                @yield('DataPresensi')
+                                @yield('DataAbsen')
+                                @yield('DataUser')
+                                @yield('Datagetpass')
+                            </div>
+                        </div>
+
+
 
 
         <!-- core:js -->
