@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -44,11 +43,11 @@
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
-        @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-        @endif
+        {{-- @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif --}}
         <nav class="sidebar active">
             <div class="sidebar-header">
                 <a href="#" class="sidebar-brand">
@@ -64,7 +63,7 @@
                 <ul class="nav">
                     <li class="nav-item nav-category">Main</li>
                     <li class="nav-item">
-                        <a href="/Dashboard/home" class="nav-link">
+                        <a href="/home" class="nav-link">
                             <i class="link-icon" data-feather="box"></i>
                             <span class="link-title">Dashboard</span>
                         </a>
@@ -98,35 +97,35 @@
             </div>
         </nav>
 
-                            <div class="page-wrapper">
-                                @yield('Content')
-                                @yield('DataPresensi')
+        <div class="page-wrapper">
+            @yield('Content')
+            {{-- @yield('DataPresensi')
                                 @yield('DataAbsen')
                                 @yield('DataUser')
-                                @yield('Datagetpass')
-                            </div>
-                        </div>
+                                @yield('Datagetpass') --}}
+        </div>
+    </div>
 
 
 
 
-        <!-- core:js -->
-        <script src="{{ asset('../assets/vendors/core/core.js') }}"></script>
-        <!-- endinject -->
+    <!-- core:js -->
+    <script src="{{ asset('../assets/vendors/core/core.js') }}"></script>
+    <!-- endinject -->
 
-        <!-- Plugin js for this page -->
-        <script src="{{ asset('../assets/vendors/flatpickr/flatpickr.min.js') }}"></script>
-        <script src="{{ asset('../assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
-        <!-- End plugin js for this page -->
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('../assets/vendors/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('../assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- End plugin js for this page -->
 
-        <!-- inject:js -->
-        <script src="{{ asset('../assets/vendors/feather-icons/feather.min.js') }}"></script>
-        <script src="{{ asset('../assets/js/template.js') }}"></script>
-        <!-- endinject -->
+    <!-- inject:js -->
+    <script src="{{ asset('../assets/vendors/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('../assets/js/template.js') }}"></script>
+    <!-- endinject -->
 
-        <!-- Custom js for this page -->
-        <script src="{{ asset('../assets/js/dashboard-dark.js') }}"></script>
-        <!-- End custom js for this page -->
+    <!-- Custom js for this page -->
+    <script src="{{ asset('../assets/js/dashboard-dark.js') }}"></script>
+    <!-- End custom js for this page -->
 
 </body>
 

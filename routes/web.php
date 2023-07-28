@@ -19,8 +19,9 @@ Route::get('/Login/login', function () {
 
 Auth::routes();
 
-Route::get('/Dashboard/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'readUser'])->name('home')->middleware('user');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'readPresensi'])->name('home')->middleware('user');
 // Route::get('/home/customer', [App\Http\Controllers\HomeController::class, 'customer'])->middleware('user','fireauth');
 
 Route::get('/email/verify', [App\Http\Controllers\Auth\ResetController::class, 'verify_email'])->name('verify')->middleware('fireauth');

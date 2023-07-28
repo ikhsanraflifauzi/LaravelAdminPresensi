@@ -32,10 +32,31 @@ class HomeController extends Controller
       try {
         $uid = Session::get('uid');
         $user = app('firebase.auth')->getUser($uid);
-        return view('Dashboard.home');
+        return view('Dashboard.homeContent');
       } catch (\Exception $e) {
         return $e;
       }
+
+    }
+
+    public function readuser(){
+        $data = app('firebase.firestore')->database()->collection('Employee')->documents();
+        return view('Dashboard.homeContent', [
+            'Users'=>$data
+        ]);
+
+    }
+    public function readPresensi(){
+        $documents = app('firebase.firestore')->database()->collection('Employee')->documents();
+        $doc = [];
+        foreach($documents as $userDoc){
+            $doc[] = $userDoc->id();
+        }
+
+        $data = app('firebase.firestore')->database()->collection('Employee')->documents()->collection('presensi')->documents();
+        return view('Dashboard.homeContent', [
+            'presensi'=>$data
+        ]);
 
     }
 
