@@ -76,16 +76,16 @@
                                         <tr>
                                             <th class="pt-0">NIP</th>
                                             <th class="pt-0">Nama</th>
-                                            <th class="pt-0">Jabatan</th>
-                                            <th class="pt-0">Prodi</th>
                                             <th class="pt-0">email</th>
-                                            <th class="pt-0">Role</th>
+                                            <th class="pt-0">role</th>
+                                            <th class="pt-0">jabatan</th>
+                                            <th class="pt-0">Prodi</th>
                                             <th class="pt-0"></th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($Users as $userData)
+                                         @foreach ($Users as $userData)
                                         <tr>
                                             <td>{{$userData->data()['NIP']}}</td>
                                             <td>{{$userData->data()['Name']}}</td>
@@ -150,7 +150,7 @@
                                     </thead>
                                     <tbody>
 
-                                            @foreach ($presensi as $datapresensi)
+                                           {{-- @foreach ($presensi as $datapresensi)
                                             <tr>
                                                 <td>{{$datapresensi->data()['NIP']}}</td>
                                                 <td>{{$datapresensi->data()['Name']}}</td>
@@ -160,7 +160,7 @@
                                                 <td>{{$datapresensi->data()['check out']['tanggal']}}</td>
                                             </tr>
 
-                                            @endforeach
+                                            @endforeach --}}
 
 
 

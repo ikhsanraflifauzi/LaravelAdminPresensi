@@ -7,6 +7,8 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Contract\Auth;
 use Kreait\Firebase\Exception\FirebaseException;
+use Google\Cloud\Firestore\FieldPath;
+
 use Session;
 
 class HomeController extends Controller
@@ -46,19 +48,10 @@ class HomeController extends Controller
         ]);
 
     }
-    public function readPresensi(){
-        $documents = app('firebase.firestore')->database()->collection('Employee')->documents();
-        $doc = [];
-        foreach($documents as $userDoc){
-            $doc[] = $userDoc->id();
-        }
 
-        $data = app('firebase.firestore')->database()->collection('Employee')->documents()->collection('presensi')->documents();
-        return view('Dashboard.homeContent', [
-            'presensi'=>$data
-        ]);
 
-    }
+
+
 
     public function customer()
     {
