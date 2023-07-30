@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'readUser'])->name('home')->middleware('user');
+Route::get('/home', [App\Http\Controllers\PresensiController::class, 'showPresensi'])->name('home')->middleware('user');
 
 // Route::get('/home/customer', [App\Http\Controllers\HomeController::class, 'customer'])->middleware('user','fireauth');
 

@@ -85,7 +85,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         @foreach ($Users as $userData)
+                                       {{--   @foreach ($Users as $userData)
                                         <tr>
                                             <td>{{$userData->data()['NIP']}}</td>
                                             <td>{{$userData->data()['Name']}}</td>
@@ -93,7 +93,7 @@
                                             <td>{{$userData->data()['role']}}</td>
                                         </tr>
 
-                                        @endforeach
+                                        @endforeach --}}
                                         <tr>
 
                                         </tr>
@@ -150,17 +150,30 @@
                                     </thead>
                                     <tbody>
 
-                                           {{-- @foreach ($presensi as $datapresensi)
+
+                                           @foreach ($presensiData as $datapresensi)
                                             <tr>
-                                                <td>{{$datapresensi->data()['NIP']}}</td>
-                                                <td>{{$datapresensi->data()['Name']}}</td>
-                                                <td>{{$datapresensi->data()['tanggal']}}</td>
-                                                <td>{{$datapresensi->data()['check in']['tanggal']}}</td>
-                                                <td>{{$datapresensi->data()['check in']['status']}}</td>
-                                                <td>{{$datapresensi->data()['check out']['tanggal']}}</td>
+                                                {{-- <td>{{$datapresensi['NIP']}}</td>
+                                                <td>{{$datapresensi['Name']}}</td> --}}
+                                                <td>{{ \Carbon\Carbon::parse($datapresensi['tanggal'])->format('d M Y') }}</td>
+                                                <td>
+                                                    @if (isset($datapresensi['check in']['tanggal']))
+                                                        {{ \Carbon\Carbon::parse($datapresensi['check in']['tanggal'])->format('H:i:s') }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($datapresensi['check in']['status']))
+                                                        {{$datapresensi['check in']['status']}}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($datapresensi['check out']['tanggal']))
+                                                        {{ \Carbon\Carbon::parse($datapresensi['check out']['tanggal'])->format('H:i:s') }}
+                                                    @endif
+                                                </td>
                                             </tr>
 
-                                            @endforeach --}}
+                                            @endforeach
 
 
 

@@ -8,18 +8,16 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Cloud\Firestore\FirestoreClient;
 use Carbon\Carbon;
 
-
-
-class PresensiController extends Controller
+class AbsenController extends Controller
 {
-    public function readPresensi() {
+    public function readAbsen() {
 
         $employeeRef = app('firebase.firestore')->database()->collection('Employee');
 
         $documents = $employeeRef->documents();
 
 
-        $presensiData = [];
+        $absenData = [];
 
 
         foreach ($documents as $document) {
@@ -27,28 +25,28 @@ class PresensiController extends Controller
             $docID = $document->id();
 
 
-            $presensiRef = $employeeRef->document($docID)->collection('presensi');
+            $absenRef = $employeeRef->document($docID)->collection('Absen');
 
 
-            $presensiDocuments = $presensiRef->documents();
+            $absenDocuments = $absenRef->documents();
 
 
-            foreach ($presensiDocuments as $presensiDocument) {
+            foreach ($absenDocuments as $absenDocument) {
 
-                $presensiData[] = $presensiDocument->data();
+                $absenData[] = $absenDocument->data();
             }
         }
 
 
 
-        return $presensiData;
+        return $absenData;
     }
-    public function showPresensi()
+    public function showAbsen()
     {
         // Panggil fungsi readPresensi() untuk mendapatkan data presensi
-        $presensiData = $this->readPresensi();
+        $absenData = $this->readAbsen();
 
         // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('Dashboard.homeContent', compact('presensiData'));
+        return view('Dashboard.homeContent', compact('absenData'));
     }
 }

@@ -8,18 +8,16 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Cloud\Firestore\FirestoreClient;
 use Carbon\Carbon;
 
-
-
-class PresensiController extends Controller
+class GetPassController extends Controller
 {
-    public function readPresensi() {
+    public function readGetPass() {
 
         $employeeRef = app('firebase.firestore')->database()->collection('Employee');
 
         $documents = $employeeRef->documents();
 
 
-        $presensiData = [];
+        $getpassData = [];
 
 
         foreach ($documents as $document) {
@@ -27,28 +25,28 @@ class PresensiController extends Controller
             $docID = $document->id();
 
 
-            $presensiRef = $employeeRef->document($docID)->collection('presensi');
+            $getpassRef = $employeeRef->document($docID)->collection('GetPass');
 
 
-            $presensiDocuments = $presensiRef->documents();
+            $getpassDocuments = $getpassRef->documents();
 
 
-            foreach ($presensiDocuments as $presensiDocument) {
+            foreach ($getpassDocuments as $getpassDocument) {
 
-                $presensiData[] = $presensiDocument->data();
+                $getpassData[] = $getpassDocument->data();
             }
         }
 
 
 
-        return $presensiData;
+        return $getpassData;
     }
-    public function showPresensi()
+    public function showGetPass()
     {
         // Panggil fungsi readPresensi() untuk mendapatkan data presensi
-        $presensiData = $this->readPresensi();
+        $getpassData = $this->readGetPass();
 
         // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('Dashboard.homeContent', compact('presensiData'));
+        return view('Dashboard.homeContent', compact('getpassData'));
     }
 }
