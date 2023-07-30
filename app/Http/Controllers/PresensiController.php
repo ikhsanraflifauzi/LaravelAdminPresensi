@@ -49,6 +49,6 @@ class PresensiController extends Controller
         $presensiData = $this->readPresensi();
 
         // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('Dashboard.homeContent', compact('presensiData'));
+        return view('', compact('presensiData'));
     }
 }
