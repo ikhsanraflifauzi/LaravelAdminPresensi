@@ -22,7 +22,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'readUser'])->name('home')->middleware('user');
 Route::get('/home', [App\Http\Controllers\PresensiController::class, 'showPresensi'])->name('home')->middleware('user');
-
+Route::get('/datapresensi', [App\Http\Controllers\PresensiController::class, 'showPresensi'])->name('datapresensi')->middleware('user');
+Route::get('/datagetpass', [App\Http\Controllers\GetPassController::class, 'showAbsen'])->name('dataabsen')->middleware('user');
+Route::get('/dataabsen', [App\Http\Controllers\AbsenController::class, 'showGetPass'])->name('datagetpass')->middleware('user');
+Route::get('/datauser', [App\Http\Controllers\HomeController::class, 'readUser'])->name('home')->middleware('user');
 // Route::get('/home/customer', [App\Http\Controllers\HomeController::class, 'customer'])->middleware('user','fireauth');
 
 Route::get('/email/verify', [App\Http\Controllers\Auth\ResetController::class, 'verify_email'])->name('verify')->middleware('fireauth');

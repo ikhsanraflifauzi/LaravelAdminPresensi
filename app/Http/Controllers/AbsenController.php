@@ -47,6 +47,6 @@ class AbsenController extends Controller
         $absenData = $this->readAbsen();
 
         // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('Dashboard.homeContent', compact('absenData'));
+        return view('DataAbsen.dataabsen', compact('absenData'));
     }
 }
