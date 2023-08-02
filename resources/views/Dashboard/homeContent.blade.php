@@ -85,7 +85,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       {{--   @foreach ($Users as $userData)
+                                         @foreach ($Users as $userData)
                                         <tr>
                                             <td>{{$userData->data()['NIP']}}</td>
                                             <td>{{$userData->data()['Name']}}</td>
@@ -93,7 +93,7 @@
                                             <td>{{$userData->data()['role']}}</td>
                                         </tr>
 
-                                        @endforeach --}}
+                                        @endforeach
                                         <tr>
 
                                         </tr>
@@ -151,10 +151,10 @@
                                     <tbody>
 
 
-                                           @foreach ($presensiData as $datapresensi)
+                                          {{--  @foreach ($presensiData as $datapresensi)
                                             <tr>
-                                                {{-- <td>{{$datapresensi['NIP']}}</td>
-                                                <td>{{$datapresensi['Name']}}</td> --}}
+                                                <td>{{$datapresensi['NIP']}}</td>
+                                                <td>{{$datapresensi['Name']}}</td>
                                                 <td>{{ \Carbon\Carbon::parse($datapresensi['tanggal'])->format('d M Y') }}</td>
                                                 <td>
                                                     @if (isset($datapresensi['check in']['tanggal']))
@@ -174,7 +174,7 @@
                                             </tr>
 
                                             @endforeach
-
+ --}}
 
 
                                     </tbody>

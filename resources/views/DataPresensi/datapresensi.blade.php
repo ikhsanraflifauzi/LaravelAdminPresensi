@@ -1,6 +1,10 @@
 @extends('Dashboard.home')
 
 @section('DataPresensi')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-A4w5s/N0LtxrNClGYw4A0tETI2RNapiIx72Mr8j2z8WZO0kQVhq4Ld2J9U2bO6w7" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
     <nav class="navbar">
         <a href="#" class="sidebar-toggler">
             <i data-feather="menu"></i>
@@ -51,9 +55,9 @@
                             data-feather="calendar" class="text-primary"></i></span>
                     <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date"
                         data-input>
-                </div>
 
             </div>
+            <button type="button" class="btn btn-primary" id="showDialogBtn">Show Dialog</button>
         </div>
         <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
@@ -83,13 +87,61 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                       @foreach ($data as $document)
+                                           @foreach ($document['presensi'] as $presensi )
+                                           <tr>
+                                             <td>{{$document['NIP']}}</td>
+                                             <td>{{$document['Name']}}</td>
+                                             <td> @if (isset($document['jabatan']))
+                                                {{$document['jabatan']}}
+                                            @endif</td>
+                                            <td> @if (isset($document['prodi']))
+                                                {{$document['prodi']}}
+                                            @endif</td>
+                                             <td>{{ \Carbon\Carbon::parse($presensi['tanggal'])->format('d M Y') }}</td>
+                                             <td>
+                                                 @if (isset($presensi['check in']['tanggal']))
+                                                     {{ \Carbon\Carbon::parse($presensi['check in']['tanggal'])->format('H:i:s') }}
+                                                 @endif
+                                             </td>
+                                             <td>
+                                                 @if (isset($presensi['check in']['status']))
+                                                     {{$presensi['check in']['status']}}
+                                                 @endif
+                                             </td>
+                                             <td>
+                                                 @if (isset($presensi['check out']['tanggal']))
+                                                     {{ \Carbon\Carbon::parse($presensi['check out']['tanggal'])->format('H:i:s') }}
+                                                 @endif
+                                             </td>
+                                         </tr>
 
-                                    </tr>
+                                           @endforeach
+
+                                            @endforeach
+
+
+
+
 
 
                                 </tbody>
                             </table>
+
+                            <script>
+
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    const datepickers = document.querySelectorAll(".datepicker");
+                                    datepickers.forEach(function (datepicker) {
+                                        new Datepicker(datepicker, {
+                                            format: "yyyy-mm-dd",
+                                            autoHide: true,
+                                        });
+                                    });
+                                });
+                            </script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-T5P0fjRb7qbp8FkW/52RA2t3UuKO0t3RJyj4N2XtlI6ZwoeaF1WZtf+qVuBDVXpH" crossorigin="anonymous"></script>
+
                         </div>
                     </div>
                 </div>

@@ -11,42 +11,31 @@ use Carbon\Carbon;
 class AbsenController extends Controller
 {
     public function readAbsen() {
+        $mainCollectionName = 'Employee';
+        $subCollectionName = 'Absen';
 
-        $employeeRef = app('firebase.firestore')->database()->collection('Employee');
+        $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+        $documents = $mainCollection->documents();
 
-        $documents = $employeeRef->documents();
-
-
-        $absenData = [];
-
+        $data = [];
 
         foreach ($documents as $document) {
+            $documentData = $document->data();
+            $documentId = $document->id();
 
-            $docID = $document->id();
+            $subCollection = app('firebase.firestore')->database()->collection($mainCollectionName)->document($documentId)->collection($subCollectionName);
+            $subDocuments = $subCollection->documents();
 
+            $documentData['Absen'] = [];
 
-            $absenRef = $employeeRef->document($docID)->collection('Absen');
-
-
-            $absenDocuments = $absenRef->documents();
-
-
-            foreach ($absenDocuments as $absenDocument) {
-
-                $absenData[] = $absenDocument->data();
+            foreach ($subDocuments as $subDocument) {
+                $documentData['Absen'][] = $subDocument->data();
             }
+
+            $data[] = $documentData;
         }
 
+        return view('DataAbsen.dataabsen', compact('data'));
 
-
-        return $absenData;
-    }
-    public function showAbsen()
-    {
-        // Panggil fungsi readPresensi() untuk mendapatkan data presensi
-        $absenData = $this->readAbsen();
-
-        // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('DataAbsen.dataabsen', compact('absenData'));
     }
 }

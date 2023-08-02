@@ -46,13 +46,19 @@
                 <h4 class="mb-3 mb-md-0"> Data User</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
+
+                <br>
                 <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
                     <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i
                             data-feather="calendar" class="text-primary"></i></span>
                     <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date"
                         data-input>
                 </div>
-
+                <a href="/tambahuser">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Tambah User') }}
+                    </button>
+                </a>
             </div>
         </div>
         <div class="row">
@@ -83,9 +89,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-
-                                    </tr>
+                                    @foreach ($Users as $userData)
+                                        <tr>
+                                            <td>{{ $userData->data()['NIP'] }}</td>
+                                            <td>{{ $userData->data()['Name'] }}</td>
+                                            <td> @if (isset($userData->data()['jabatan']))
+                                                {{$userData->data()['jabatan']}}
+                                            @endif</td>
+                                            <td> @if (isset($userData->data()['prodi']))
+                                                {{$userData->data()['prodi']}}
+                                            @endif</td>
+                                            <td>{{ $userData->data()['email'] }}</td>
+                                            <td>{{ $userData->data()['role'] }}</td>
+                                        </tr>
+                                    @endforeach
 
 
                                 </tbody>

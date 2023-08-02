@@ -82,10 +82,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($data as $document)
+                                    @foreach ($document['Absen'] as $absen )
                                     <tr>
+                                      <td>{{$document['NIP']}}</td>
+                                      <td>{{$document['Name']}}</td>
+                                      <td> @if (isset($documnet['jabatan']))
+                                        {{$document['jabatan']}}
+                                    @endif</td>
+                                    <td> @if (isset($documnet['prodi']))
+                                        {{$document['prodi']}}
+                                    @endif</td>
 
-                                    </tr>
+                                      <td>
+                                          @if (isset($absen['Absen']['Keterangan']))
+                                              {{$absen['Absen']['Keterangan']}}
+                                          @endif
+                                      </td>
+                                      <td>
+                                          @if (isset($absen['Absen']['Tanggal']))
+                                              {{\Carbon\Carbon::parse($absen['Absen']['Tanggal'])->format('d M Y')}}
+                                          @endif
+                                      </td>
+                                      <td>
+                                          @if (isset($absen['Absen']['fotoSurat']))
+                                          <a href="{{ asset($absen['Absen']['fotoSurat']) }}">{{ asset($absen['Absen']['fotoSurat']) }}</a>
+                                          @endif
+                                      </td>
+                                  </tr>
 
+                                    @endforeach
+
+                                     @endforeach
 
 
                                 </tbody>

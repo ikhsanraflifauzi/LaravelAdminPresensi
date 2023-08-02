@@ -12,41 +12,30 @@ class GetPassController extends Controller
 {
     public function readGetPass() {
 
-        $employeeRef = app('firebase.firestore')->database()->collection('Employee');
+        $mainCollectionName = 'Employee';
+        $subCollectionName = 'GetPass';
 
-        $documents = $employeeRef->documents();
+        $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+        $documents = $mainCollection->documents();
 
-
-        $getpassData = [];
-
+        $data = [];
 
         foreach ($documents as $document) {
+            $documentData = $document->data();
+            $documentId = $document->id();
 
-            $docID = $document->id();
+            $subCollection = app('firebase.firestore')->database()->collection($mainCollectionName)->document($documentId)->collection($subCollectionName);
+            $subDocuments = $subCollection->documents();
 
+            $documentData['GetPass'] = [];
 
-            $getpassRef = $employeeRef->document($docID)->collection('GetPass');
-
-
-            $getpassDocuments = $getpassRef->documents();
-
-
-            foreach ($getpassDocuments as $getpassDocument) {
-
-                $getpassData[] = $getpassDocument->data();
+            foreach ($subDocuments as $subDocument) {
+                $documentData['GetPass'][] = $subDocument->data();
             }
+
+            $data[] = $documentData;
         }
 
-
-
-        return $getpassData;
-    }
-    public function showGetPass()
-    {
-        // Panggil fungsi readPresensi() untuk mendapatkan data presensi
-        $getpassData = $this->readGetPass();
-
-        // Tampilkan view presensi.blade.php dan kirimkan data presensi ke dalam view
-        return view('Dashboard.homeContent', compact('getpassData'));
+        return view('DataGetPass.datagetpass', compact('data'));
     }
 }

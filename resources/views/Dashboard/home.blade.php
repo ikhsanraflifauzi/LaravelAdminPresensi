@@ -70,25 +70,25 @@
                     </li>
                     <li class="nav-item nav-category"> Data Control</li>
                     <li class="nav-item">
-                        <a href="/DataUser/dataUser" class="nav-link">
+                        <a href="/datauser" class="nav-link">
                             <i class="link-icon" data-feather="user"></i>
                             <span class="link-title">Data User</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/DataPresensi/datapresensi" class="nav-link">
+                        <a href="/datapresensi" class="nav-link">
                             <i class="link-icon" data-feather="check"></i>
                             <span class="link-title">Data Presensi</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/DataAbsen/dataAbsen" class="nav-link">
+                        <a href="/dataabsen" class="nav-link">
                             <i class="link-icon" data-feather="calendar"></i>
                             <span class="link-title">Data Absen</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/Datagetpass/dataGetPass" class="nav-link">
+                        <a href="/datagetpass" class="nav-link">
                             <i class="link-icon" data-feather="arrow-right"></i>
                             <span class="link-title">Data GetPass</span>
                         </a>
@@ -99,10 +99,10 @@
 
         <div class="page-wrapper">
             @yield('Content')
-            {{-- @yield('DataPresensi')
-                                @yield('DataAbsen')
-                                @yield('DataUser')
-                                @yield('Datagetpass') --}}
+            @yield('DataPresensi')
+            @yield('DataAbsen')
+            @yield('DataUser')
+            @yield('Datagetpass')
         </div>
     </div>
 

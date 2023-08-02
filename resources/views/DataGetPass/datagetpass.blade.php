@@ -84,26 +84,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @foreach ($data as $document)
+                                           @foreach ($document['GetPass'] as $getpass )
+                                           <tr>
+                                             <td>{{$document['NIP']}}</td>
+                                             <td>{{$document['Name']}}</td>
+                                             <td> @if (isset($document['jabatan']))
+                                                {{$documnet['jabatan']}}
+                                            @endif</td>
+                                            <td> @if (isset($documnet['prodi']))
+                                                {{$document['prodi']}}
+                                            @endif</td>
+                                             <td>{{ \Carbon\Carbon::parse($getpass['Tanggal'])->format('d M Y') }}</td>
+                                             <td>
+                                                 @if (isset($getpass['GetPass']['Alasan']))
+                                                     {{$getpass['GetPass']['Alasan']}}
+                                                 @endif
+                                             </td>
+                                             <td>
+                                                 @if (isset($getpass['GetPass']['Tanggal']))
+                                                     {{\Carbon\Carbon::parse($getpass['GetPass']['Tanggal'])->format('H:i::s')}}
+                                                 @endif
+                                             </td>
+                                             <td>
+                                                 @if (isset($getpass['GetBack']['Tanggal']))
+                                                     {{ \Carbon\Carbon::parse($getpass['GetBack']['Tanggal'])->format('H:i:s') }}
+                                                 @endif
+                                             </td>
+                                         </tr>
 
-                                    </tr>
+                                           @endforeach
 
-                                    </tr>
-                                    <tr>
+                                            @endforeach
 
-                                    </tr>
-                                    <tr>
 
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
