@@ -31,7 +31,11 @@ Route::get('/tambahuser', [App\Http\Controllers\UserController::class, 'addUserV
 
 Route::get('/email/verify', [App\Http\Controllers\Auth\ResetController::class, 'verify_email'])->name('verify')->middleware('fireauth');
 Route::post('/add-employee', [App\Http\Controllers\UserController::class, 'processAddEmployee'])->name('adduser');
+Route::post('/delete-employee', [App\Http\Controllers\UserController::class, 'deleteEmployee'])->name('deleteuser');
+Route::get('/edit-user/{e}', [App\Http\Controllers\UserController::class, 'editUser'])->name('editUser');
 
+Route::post('/Update', [App\Http\Controllers\UserController::class, 'updateUser']);
+Route::get('/del/{id}' , [App\Http\Controllers\UserController::class,'delUser']);
 
 Route::post('login/{provider}/callback', 'Auth\LoginController@handleCallback');
 

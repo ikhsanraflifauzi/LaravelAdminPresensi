@@ -101,6 +101,16 @@
                                             @endif</td>
                                             <td>{{ $userData->data()['email'] }}</td>
                                             <td>{{ $userData->data()['role'] }}</td>
+                                            <td> <a href="deleteuser">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('delete User') }}
+                                                </button>
+                                            </a></td>
+                                            <td> <a href="/edit-user/{{$userData->data()['Uid']}}">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Update') }}
+                                                </button>
+                                            </a></td>
                                         </tr>
                                     @endforeach
 
