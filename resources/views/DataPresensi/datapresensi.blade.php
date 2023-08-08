@@ -57,9 +57,46 @@
                         data-input>
 
             </div>
-            <button type="button" class="btn btn-primary" id="showDialogBtn">Show Dialog</button>
+
         </div>
         <div class="row">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+                <div class="card overflow-hidden">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+                            <h6 class="card-title mb-0"> Filter tanggal</h6>
+                            <div class="dropdown mb-2">
+                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <form class="forms-sample" method="GET" action="/filterpresensi">
+                            @csrf
+                            <div class="row mb-3">
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tanggal awal</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" id="nip" placeholder="tanggal awal" required="required" value="{{ old('tanggal') }}" name="sdate">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">tanggal akhir</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" id="name" autocomplete="off" placeholder="tanggal akhir" required="required" value="{{ old('tanggal') }}" name="edate">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-9 offset-sm-7">
+                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-12 col-xl-12 grid-margin stretch-card">
                 <div class="card overflow-hidden">
                     <div class="card-body">
@@ -72,6 +109,7 @@
                                 </a>
                             </div>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
@@ -129,19 +167,32 @@
                             </table>
 
                             <script>
+                                $(document).ready(function() {
+                                    // Initialize date picker
+                                    $('#start-date').datepicker();
+                                    $('#end-date').datepicker();
 
-                                document.addEventListener("DOMContentLoaded", function () {
-                                    const datepickers = document.querySelectorAll(".datepicker");
-                                    datepickers.forEach(function (datepicker) {
-                                        new Datepicker(datepicker, {
-                                            format: "yyyy-mm-dd",
-                                            autoHide: true,
+                                    // Filter button click event
+                                    $('#filter-button').click(function() {
+                                        var startDate = $('#start-date').val();
+                                        var endDate = $('#end-date').val();
+
+                                        // Make an AJAX request to your filterPresensi route/controller
+                                        $.ajax({
+                                            url: '/filterpresensi', // Update this with your route/controller URL
+                                            type: 'GET',
+                                            data: { startDate: startDate, endDate: endDate },
+                                            success: function(data) {
+                                                // Display filtered data in #filtered-data div
+                                                $('#filtered-data').html(data);
+                                            },
+                                            error: function(error) {
+                                                console.error('Error:', error);
+                                            }
                                         });
                                     });
                                 });
-                            </script>
-                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-T5P0fjRb7qbp8FkW/52RA2t3UuKO0t3RJyj4N2XtlI6ZwoeaF1WZtf+qVuBDVXpH" crossorigin="anonymous"></script>
-
+                                </script>
                         </div>
                     </div>
                 </div>

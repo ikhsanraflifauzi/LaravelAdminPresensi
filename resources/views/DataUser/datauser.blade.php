@@ -55,7 +55,7 @@
                         data-input>
                 </div>
                 <a href="/tambahuser">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-success">
                         {{ __('Tambah User') }}
                     </button>
                 </a>
@@ -102,7 +102,7 @@
                                             <td>{{ $userData->data()['email'] }}</td>
                                             <td>{{ $userData->data()['role'] }}</td>
                                             <td> <a href="deleteuser">
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-danger">
                                                     {{ __('delete User') }}
                                                 </button>
                                             </a></td>

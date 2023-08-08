@@ -61,6 +61,42 @@
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+                            <h6 class="card-title mb-0"> Filter tanggal</h6>
+                            <div class="dropdown mb-2">
+                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <form class="forms-sample" method="GET" action="/filterGetPass">
+                            @csrf
+                            <div class="row mb-3">
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tanggal awal</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" id="nip" placeholder="tanggal awal" required="required" value="{{ old('Tanggal') }}" name="sdate">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">tanggal akhir</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" id="name" autocomplete="off" placeholder="tanggal akhir" required="required" value="{{ old('Tanggal') }}" name="edate">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-9 offset-sm-7">
+                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+                <div class="card overflow-hidden">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
                             <h6 class="card-title mb-0"> Data GetPass</h6>
                             <div class="dropdown mb-2">
                                 <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"

@@ -141,39 +141,22 @@ class UserController extends Controller
             return view('DataUser.updateuser', ['up'=>$userData],compact( 'roles', 'prodi'));
         }
 
-        public function updateUser(Request $request)
+        public function updateUser(Request $request, $id)
         {
-            $roles = [
-                'Admin',
-                'Dosen',
-                'Employee',
-                // Add other roles if needed
-            ];
-
-            $prodi = [
-                'Manufaktur',
-                'Mekatronika',
-                'Teknik Elektro',
-                'Teknologi Rekayasa Perangkat Lunak',
-                // Add other prodi options if needed
-            ];
-
-            // Check if the provided role and prodi values are valid
-            if (!in_array($request->role, $roles) || !in_array($request->prodi, $prodi)) {
-                return redirect('/datauser')->with('error', 'Invalid role or prodi value');
-            }
-
-            $updateData = [
-                ['path' => 'NIP', 'value' => $request->nip],
-                ['path' => 'Name', 'value' => $request->name],
-                ['path' => 'email', 'value' => $request->email],
-                ['path' => 'role', 'value' => $request->role],
-                ['path' => 'jabatan', 'value' => $request->jabatan],
-                ['path' => 'prodi', 'value' => $request->prodi]
-            ];
-
-            $documentId = $request->uid; // Assuming uid contains the specific document ID
-            app('firebase.firestore')->database()->collection('Employee')->document($documentId)->update($updateData);
+            $employeeCollection = app('firebase.firestore')->database()->collection('Employee');
+            $userid = $employeeCollection->document()->uid;
+            $userUpdate = app('firebase.firestore')
+                ->database()
+                ->collection('Employee')
+                ->document($userid)
+                ->update([
+                    ['path'=>'NIP','value'=>$request->nip],
+                    ['path'=>'Name','value'=>$request->name],
+                    ['path'=>'email','value'=>$request->email],
+                    ['path'=>'role','value'=>$request->role],
+                    ['path'=>'jabatan','value'=>$request->jabatan],
+                    ['path'=>'prodi','value'=>$request->prodi],
+                ]);
 
             return redirect('/datauser')->with('success', 'User data updated successfully');
         }

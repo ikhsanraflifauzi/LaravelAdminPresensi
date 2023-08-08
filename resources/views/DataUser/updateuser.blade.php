@@ -71,8 +71,9 @@
 
                                 <h6 class="card-title"></h6>
                                 @foreach ($up as $i)
-    <form class="forms-sample" method="POST" action="/Update">
+    <form class="forms-sample" method="POST" action="/Update/{id}">
         @csrf
+        @method('PUT')
         <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NIP</label>
             <div class="col-sm-9">
