@@ -165,7 +165,14 @@
 
                                 </tbody>
                             </table>
-
+                            <br>
+                            <form class="forms-sample" method="GET" action="/exportExcel">
+                            <div class="row mb-3">
+                                <div class="col-sm-9 offset-sm-10">
+                                    <button type="submit" class="btn btn-success" id="showDialogBtn">Export</button>
+                                </div>
+                            </div>
+                            </form>
                             <script>
                                 $(document).ready(function() {
                                     // Initialize date picker

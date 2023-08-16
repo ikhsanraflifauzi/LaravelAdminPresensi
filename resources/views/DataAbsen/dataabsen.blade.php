@@ -142,7 +142,13 @@
                                       </td>
                                       <td>
                                           @if (isset($absen['Absen']['fotoSurat']))
-                                          <a href="{{ asset($absen['Absen']['fotoSurat']) }}">{{ asset($absen['Absen']['fotoSurat']) }}</a>
+                                          <a href="{{ asset($absen['Absen']['fotoSurat']) }}">
+                                            <div class="row mb-3">
+                                                <div class="col-sm-10 offset-sm-10">
+                                                    <button type="submit" class="btn btn-success" id="showDialogBtn">Download</button>
+                                                </div>
+                                            </div>
+                                        </a>
                                           @endif
                                       </td>
                                   </tr>

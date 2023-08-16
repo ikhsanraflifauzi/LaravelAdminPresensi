@@ -93,6 +93,12 @@
                             <span class="link-title">Data GetPass</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/TimeDate" class="nav-link">
+                            <i class="link-icon" data-feather="arrow-right"></i>
+                            <span class="link-title">atur waktu</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -103,6 +109,7 @@
             @yield('DataAbsen')
             @yield('DataUser')
             @yield('Datagetpass')
+            @yield('timeSetting')
         </div>
     </div>
 

@@ -74,13 +74,16 @@
                             <div class="row mb-3">
                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tanggal awal</label>
                                 <div class="col-sm-5">
-                                    <input type="date" class="form-control" id="nip" placeholder="tanggal awal" required="required" value="{{ old('Tanggal') }}" name="sdate">
+                                    <input type="date" class="form-control" id="nip" placeholder="tanggal awal"
+                                        required="required" value="{{ old('Tanggal') }}" name="sdate">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">tanggal akhir</label>
                                 <div class="col-sm-5">
-                                    <input type="date" class="form-control" id="name" autocomplete="off" placeholder="tanggal akhir" required="required" value="{{ old('Tanggal') }}" name="edate">
+                                    <input type="date" class="form-control" id="name" autocomplete="off"
+                                        placeholder="tanggal akhir" required="required" value="{{ old('Tanggal') }}"
+                                        name="edate">
                                 </div>
                             </div>
 
@@ -105,6 +108,14 @@
                                 </a>
                             </div>
                         </div>
+                        <br>
+                            <form class="forms-sample" method="GET" action="/exportGetPass">
+                                <div class="row mb-3">
+                                    <div class="col-sm-10 offset-sm-10">
+                                        <button type="submit" class="btn btn-success" id="showDialogBtn">Export</button>
+                                    </div>
+                                </div>
+                            </form>
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
@@ -121,41 +132,44 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $document)
-                                           @foreach ($document['GetPass'] as $getpass )
-                                           <tr>
-                                             <td>{{$document['NIP']}}</td>
-                                             <td>{{$document['Name']}}</td>
-                                             <td> @if (isset($document['jabatan']))
-                                                {{$documnet['jabatan']}}
-                                            @endif</td>
-                                            <td> @if (isset($documnet['prodi']))
-                                                {{$document['prodi']}}
-                                            @endif</td>
-                                             <td>{{ \Carbon\Carbon::parse($getpass['Tanggal'])->format('d M Y') }}</td>
-                                             <td>
-                                                 @if (isset($getpass['GetPass']['Alasan']))
-                                                     {{$getpass['GetPass']['Alasan']}}
-                                                 @endif
-                                             </td>
-                                             <td>
-                                                 @if (isset($getpass['GetPass']['Tanggal']))
-                                                     {{\Carbon\Carbon::parse($getpass['GetPass']['Tanggal'])->format('H:i::s')}}
-                                                 @endif
-                                             </td>
-                                             <td>
-                                                 @if (isset($getpass['GetBack']['Tanggal']))
-                                                     {{ \Carbon\Carbon::parse($getpass['GetBack']['Tanggal'])->format('H:i:s') }}
-                                                 @endif
-                                             </td>
-                                         </tr>
-
-                                           @endforeach
-
-                                            @endforeach
+                                        @foreach ($document['GetPass'] as $getpass)
+                                            <tr>
+                                                <td>{{ $document['NIP'] }}</td>
+                                                <td>{{ $document['Name'] }}</td>
+                                                <td>
+                                                    @if (isset($document['jabatan']))
+                                                        {{ $document['jabatan'] }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($documnet['prodi']))
+                                                        {{ $document['prodi'] }}
+                                                    @endif
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($getpass['Tanggal'])->format('d M Y') }}</td>
+                                                <td>
+                                                    @if (isset($getpass['GetPass']['Alasan']))
+                                                        {{ $getpass['GetPass']['Alasan'] }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($getpass['GetPass']['Tanggal']))
+                                                        {{ \Carbon\Carbon::parse($getpass['GetPass']['Tanggal'])->format('H:i::s') }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (isset($getpass['GetBack']['Tanggal']))
+                                                        {{ \Carbon\Carbon::parse($getpass['GetBack']['Tanggal'])->format('H:i:s') }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
 
 
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>

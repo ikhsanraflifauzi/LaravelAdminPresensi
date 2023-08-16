@@ -73,12 +73,17 @@ public function filterPresensi(Request $request) {
 
     return view('DataPresensi.datapresensi', compact('data'));
 }
+
+
+
+
 public function exportPresensi()
 {
     $mainCollectionName = 'Employee';
     $subCollectionName = 'presensi';
 
-    $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+    $firestore = app('firebase.firestore');
+    $mainCollection = $firestore->database()->collection($mainCollectionName);
     $documents = $mainCollection->documents();
 
     $data = [];
@@ -87,7 +92,7 @@ public function exportPresensi()
         $documentData = $document->data();
         $documentId = $document->id();
 
-        $subCollection = app('firebase.firestore')->database()->collection($mainCollectionName)->document($documentId)->collection($subCollectionName);
+        $subCollection = $mainCollection->document($documentId)->collection($subCollectionName);
         $subDocuments = $subCollection->documents();
 
         $documentData['presensi'] = [];
@@ -98,12 +103,13 @@ public function exportPresensi()
 
         $data[] = $documentData;
     }
+
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
     // Header kolom
     $header = [
-        'Nama', 'Usia', 'Jabatan', 'Presensi 1', 'Presensi 2',
+        'NIP', 'Nama', 'Jabatan', 'Prodi', 'Tanggal', 'Check in', 'Status', 'Check out'
     ];
     $column = 1;
     foreach ($header as $item) {
@@ -113,17 +119,19 @@ public function exportPresensi()
     $row = 2;
 
     foreach ($data as $documentData) {
-        $sheet->setCellValueByColumnAndRow(1, $row, $documentData['nama']); // Ganti dengan nama kolom yang sesuai
-        $sheet->setCellValueByColumnAndRow(2, $row, $documentData['usia']); // Ganti dengan nama kolom yang sesuai
-        $sheet->setCellValueByColumnAndRow(3, $row, $documentData['jabatan']); // Ganti dengan nama kolom yang sesuai
-
-
-        $presensiColumn = 4;
         foreach ($documentData['presensi'] as $presensi) {
-            $sheet->setCellValueByColumnAndRow($presensiColumn++, $row, $presensi['data_presensi']); // Ganti dengan nama kolom yang sesuai
-        }
 
-        $row++;
+            $sheet->setCellValueByColumnAndRow(1, $row, $documentData['NIP']);
+            $sheet->setCellValueByColumnAndRow(2, $row, $documentData['Name']);
+            $sheet->setCellValueByColumnAndRow(3, $row, $documentData['jabatan']);
+            $sheet->setCellValueByColumnAndRow(4, $row, $documentData['prodi']);
+            $sheet->setCellValueByColumnAndRow(5, $row, \Carbon\Carbon::parse($presensi['tanggal'])->format('Y m d'));
+            $sheet->setCellValueByColumnAndRow(6, $row, \Carbon\Carbon::parse($presensi['check in']['tanggal'])->format('H:i:s'));
+            $sheet->setCellValueByColumnAndRow(7, $row, $presensi['check in']['status']);
+            $sheet->setCellValueByColumnAndRow(8, $row, isset($presensi['check out']['tanggal']) ? \Carbon\Carbon::parse($presensi['check out']['tanggal'])->format('H:i:s') : '');
+
+            $row++;
+        }
     }
 
     // Simpan file Excel
@@ -131,35 +139,11 @@ public function exportPresensi()
     $writer = new Xlsx($spreadsheet);
     $writer->save($filename);
 
-    return view('DataPresensi.datapresensi', compact('data'));
+    // Anda mungkin ingin mengembalikan berkas Excel untuk diunduh
+    return response()->download($filename)->deleteFileAfterSend(true);
 }
 
 
-    /* public function view_pegawai(Request $request)
-    {
-        $keyword = $request->keyword;
 
-        // Filtering data based on 'nama_jabatan' and 'nama_departemen'
-        $datass = DB::table('pegawais')
-            ->join('departemens', 'pegawais.id_departemen', '=', 'departemens.id')
-            ->join('jabatans', 'pegawais.id_jabatan', '=', 'jabatans.id')
-            ->when($request->nama_departemen, function ($query, $nama_departemen) {
-                return $query->where('departemens.nama_departemen', $nama_departemen);
-            })
-            ->when($request->nama_jabatan, function ($query, $nama_jabatan) {
-                return $query->where('jabatans.nama_jabatan', $nama_jabatan);
-            })
-            ->where('pegawais.nama_pegawai', 'LIKE', '%' . $keyword . '%')
-            ->get();
 
-        $jabatan = Jabatan::all();
-        $departemen = Departemen::all();
-
-        return view('data-master.view-pegawai', [
-            'keyword' => $keyword,
-            'datass' => $datass,
-            'jabatan' => $jabatan,
-            'departemen' => $departemen
-        ]);
-    } */
 }

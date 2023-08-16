@@ -101,9 +101,9 @@
                                             @endif</td>
                                             <td>{{ $userData->data()['email'] }}</td>
                                             <td>{{ $userData->data()['role'] }}</td>
-                                            <td> <a href="deleteuser">
+                                            <td> <a href="/delete-employee/{{$userData->data()['Uid']}}">
                                                 <button type="submit" class="btn btn-danger">
-                                                    {{ __('delete User') }}
+                                                    {{ __('delete') }}
                                                 </button>
                                             </a></td>
                                             <td> <a href="/edit-user/{{$userData->data()['Uid']}}">
