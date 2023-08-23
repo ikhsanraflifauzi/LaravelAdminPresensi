@@ -69,7 +69,7 @@
                                 </a>
                             </div>
                         </div>
-                        <form class="forms-sample" method="POST" action="{{ route('addtime') }}">
+                        <form class="forms-sample" method="POST" action="{{ route('addwaktumasuk') }}">
                             @csrf
                             <div class="row mb-3">
                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Waktu masuk</label>
@@ -79,20 +79,27 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> Waktu pulang</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="name" autocomplete="off"
-                                        placeholder="waktu pulang" required="required" value="{{ old('pulang') }}"
-                                        name="out">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
                                 <div class="col-sm-9 offset-sm-7">
-                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
+                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Submit</button>
                                 </div>
                             </div>
                         </form>
+                        <form class="forms-sample" method="POST" action="{{ route('addwaktupulang') }}">
+                            @csrf
+                            <div class="row mb-3">
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Waktu pulang</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="nip" placeholder="waktu masuk"
+                                        required="required" value="{{ old('pulang') }}" name="in">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-9 offset-sm-7">
+                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

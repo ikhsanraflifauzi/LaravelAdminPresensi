@@ -17,26 +17,42 @@ use Illuminate\Support\Facades\Facade;
 class TimeController extends Controller
 {
 
-
     public function addWaktumasuk(Request $request)
     {
         // Ambil waktu masuk dan waktu pulang dari permintaan
         $masukInput = trim($request->input('in'));
-        $pulangInput = trim($request->input('out'));
 
         // Parsing input menjadi objek Carbon
         $masukDateTime = Carbon::createFromFormat('H:i:s', $masukInput);
-        $pulangDateTime = Carbon::createFromFormat('H:i:s', $pulangInput);
+
 
         // Simpan dalam format waktu yang sesuai ke Firebase Firestore
         $timeCollection = app('firebase.firestore')->database()->collection('TimePic');
         $timeCollection->document('waktu_masuk')->set([
             "masuk" => $masukDateTime->toDateTimeString(),
+
+        ]);
+
+        return redirect('/TimeDate');
+    }
+    public function addWaktupulang(Request $request)
+    {
+
+        $pulangInput = trim($request->input('out'));
+
+
+        $pulangDateTime = Carbon::createFromFormat('H:i:s', $pulangInput);
+
+        // Simpan dalam format waktu yang sesuai ke Firebase Firestore
+        $timeCollection = app('firebase.firestore')->database()->collection('TimePic');
+        $timeCollection->document('waktu_pulang')->set([
+
             "pulang" => $pulangDateTime->toDateTimeString()
         ]);
 
         return redirect('/TimeDate');
     }
+
 
     public function readTime(){
         $data = app('firebase.firestore')->database()->collection('TimePic')->documents();

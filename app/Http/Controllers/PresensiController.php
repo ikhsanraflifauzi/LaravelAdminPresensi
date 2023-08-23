@@ -18,6 +18,15 @@ class PresensiController extends Controller
 {
     $mainCollectionName = 'Employee';
     $subCollectionName = 'presensi';
+    $prodi = [
+        '-',
+         'Manufaktur',
+         'Mekatronika',
+         'Teknik Elektro',
+         'Teknologi Rekayasa Perangkat Lunak',
+
+
+     ];
 
     $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
     $documents = $mainCollection->documents();
@@ -40,19 +49,31 @@ class PresensiController extends Controller
         $data[] = $documentData;
     }
 
-    return view('DataPresensi.datapresensi', compact('data'));
+    return view('DataPresensi.datapresensi', compact('data', 'prodi'));
 }
+
 public function filterPresensi(Request $request) {
     $mainCollectionName = 'Employee';
     $subCollectionName = 'presensi';
 
     $startDate = $request->input('sdate');
     $endDate = $request->input('edate');
+    $selectedProdi = $request->input('prodi');
 
+    $prodi = [
+        '-',
+        'Manufaktur',
+        'Mekatronika',
+        'Teknik Elektro',
+        'Teknologi Rekayasa Perangkat Lunak',
+    ];
     $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+    $query1 = $mainCollection->where('prodi', "=", $selectedProdi)->orderBy('prodi');
+    $docs = $query1->documents();
     $documents = $mainCollection->documents();
 
     $data = [];
+
 
     foreach ($documents as $document) {
         $documentData = $document->data();
@@ -71,8 +92,93 @@ public function filterPresensi(Request $request) {
         $data[] = $documentData;
     }
 
-    return view('DataPresensi.datapresensi', compact('data'));
+
+
+    return view('DataPresensi.datapresensi', compact('data', 'prodi', 'selectedProdi'));
 }
+
+public function prodiFilter(Request $request) {
+    $mainCollectionName = 'Employee';
+    $subCollectionName = 'presensi';
+    $prodi = [
+        '-',
+        'Manufaktur',
+        'Mekatronika',
+        'Teknik Elektro',
+        'Teknologi Rekayasa Perangkat Lunak',
+    ];
+
+    $selectedProdi = $request->input('prodi');
+
+    $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+    $query = $mainCollection->where('prodi', "=", $selectedProdi)->orderBy('prodi');
+    $documents = $query->documents();
+
+    $data = [];
+
+    foreach ($documents as $document) {
+        $documentData = $document->data();
+        $documentId = $document->id();
+
+        $subCollection = $mainCollection->document($documentId)->collection($subCollectionName);
+        $subDocuments = $subCollection->documents();
+
+        $presensiData = [];
+
+        foreach ($subDocuments as $subDocument) {
+            $presensiData[] = $subDocument->data();
+        }
+
+        $documentData['presensi'] = $presensiData;
+        $data[] = $documentData;
+    }
+
+    return view('DataPresensi.datapresensi', compact('data', 'prodi', 'selectedProdi'));
+}
+
+public function roleFilter(Request $request) {
+    $mainCollectionName = 'Employee';
+    $subCollectionName = 'presensi';
+    $prodi = [
+        '-',
+        'Manufaktur',
+        'Mekatronika',
+        'Teknik Elektro',
+        'Teknologi Rekayasa Perangkat Lunak',
+    ];
+
+    $selectedProdi = $request->input('prodi');
+
+    $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+    $query = $mainCollection->where('prodi', "=", $selectedProdi)->orderBy('prodi');
+    $documents = $query->documents();
+
+    $data = [];
+
+    foreach ($documents as $document) {
+        $documentData = $document->data();
+        $documentId = $document->id();
+
+        $subCollection = $mainCollection->document($documentId)->collection($subCollectionName);
+        $subDocuments = $subCollection->documents();
+
+        $presensiData = [];
+
+        foreach ($subDocuments as $subDocument) {
+            $presensiData[] = $subDocument->data();
+        }
+
+        $documentData['presensi'] = $presensiData;
+        $data[] = $documentData;
+    }
+
+    return view('DataPresensi.datapresensi', compact('data', 'prodi', 'selectedProdi'));
+}
+
+
+
+
+
 
 
 

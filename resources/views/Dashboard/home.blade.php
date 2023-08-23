@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- End fonts -->
 
     <!-- core:css -->
@@ -36,6 +37,10 @@
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{ asset('../assets/images/favicon.png') }}" />
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -133,6 +138,16 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('../assets/js/dashboard-dark.js') }}"></script>
     <!-- End custom js for this page -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
 
 </body>
 
