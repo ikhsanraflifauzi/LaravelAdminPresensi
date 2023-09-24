@@ -145,6 +145,7 @@ class UserController extends Controller
             $mainCollection = $firestore->database()->collection('Employee');
             $documents = $mainCollection->documents();
 
+
             $data = [];
             $docid = null;
             foreach($documents as $doc){

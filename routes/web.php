@@ -27,6 +27,7 @@ Route::get('/datagetpass', [App\Http\Controllers\GetPassController::class, 'read
 Route::get('/dataabsen', [App\Http\Controllers\AbsenController::class, 'readAbsen']);
 Route::get('/datauser', [App\Http\Controllers\UserController::class, 'readUser']);
 Route::get('/TimeDate', [App\Http\Controllers\TimeController::class, 'readTime']);
+
 Route::get('/tambahuser', [App\Http\Controllers\UserController::class, 'addUserView']);
 
 
@@ -34,15 +35,16 @@ Route::get('/filterpresensi', [App\Http\Controllers\PresensiController::class, '
 Route::get('/prodifilter', [App\Http\Controllers\PresensiController::class, 'prodiFilter']);
 Route::get('/filterGetPass', [App\Http\Controllers\GetPassController::class, 'filterGetPass']);
 Route::get('/filterAbsen', [App\Http\Controllers\AbsenController::class, 'filterAbsen']);
+Route::get('/prodiGetPass', [App\Http\Controllers\GetPassController::class, 'prodiFilterGetPass'])->name('GetPAssProdi');
 
-Route::get('/exportExcel', [App\Http\Controllers\PresensiController::class, 'exportPresensi']);
-Route::get('/exportGetPass',[App\Http\Controllers\GetPassController::class,'exportGetPass']);
+Route::get('/exportExcel', [App\Http\Controllers\PresensiController::class, 'exportPresensi'])->name('presensiExcel');
+Route::get('/exportGetPass',[App\Http\Controllers\GetPassController::class,'exportGetPass'])->name('exportExcel');
 Route::get('/export-presensi-pdf',[App\Http\Controllers\PDFController::class,'presensiPDF'])->name('presensiPdf');
 Route::get('/export-getPass-pdf',[App\Http\Controllers\PDFController::class,'getPassPDF'])->name('GetpassPdf');
 
 Route::post('/add-employee', [App\Http\Controllers\UserController::class, 'processAddEmployee'])->name('adduser');
 Route::post('/add-time', [App\Http\Controllers\TimeController::class, 'addWaktumasuk'])->name('addwaktumasuk');
-Route::post('/add-time-pulang', [App\Http\Controllers\TimeController::class, ' addWaktupulang'])->name('addwaktupulang');
+Route::post('/add-time-pulang', [App\Http\Controllers\TimeController::class, 'addWaktupulang'])->name('addwaktupulang');
 
 Route::get('/delete-employee/{id}', [App\Http\Controllers\UserController::class, 'deleteUser'])->name('deleteuser');
 Route::get('/edit-user/{e}', [App\Http\Controllers\UserController::class, 'editUser'])->name('editUser');

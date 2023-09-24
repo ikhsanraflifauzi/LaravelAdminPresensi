@@ -57,65 +57,21 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-xl-12 grid-margin stretch-card">
-                <div class="card overflow-hidden">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-                            <h6 class="card-title mb-0"> Filter tanggal</h6>
-                            <div class="dropdown mb-2">
-                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <form class="forms-sample" method="GET" action="/filterGetPass">
-                            @csrf
-                            <div class="row mb-3">
-                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tanggal awal</label>
-                                <div class="col-sm-5">
-                                    <input type="date" class="form-control" id="nip" placeholder="tanggal awal"
-                                        required="required" value="{{ old('Tanggal') }}" name="sdate">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">tanggal akhir</label>
-                                <div class="col-sm-5">
-                                    <input type="date" class="form-control" id="name" autocomplete="off"
-                                        placeholder="tanggal akhir" required="required" value="{{ old('Tanggal') }}"
-                                        name="edate">
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-sm-9 offset-sm-7">
-                                    <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="col-12 col-xl-12 grid-margin stretch-card">
                 <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
                             <h6 class="card-title mb-0"> Data GetPass</h6>
-                            <div class="dropdown mb-2">
-                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                                </a>
+                            <div class="row mb-3">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="submit" class="btn btn-info " id="showDialogBtn" data-toggle="modal" data-target="#myModal">Filter</button>
+                                    <button onclick="window.location='{{ route('exportExcel') }}'" class="btn btn-success">Excel</button>
+                                    <button onclick="window.location='{{ route('GetpassPdf') }}'" class="btn btn-danger">PDF</button>
+                                  </div>
                             </div>
                         </div>
-                        <br>
-                            <form class="forms-sample" method="GET" action="/exportGetPass">
-                                <div class="row mb-3">
-                                    <div class="col-sm-10 offset-sm-10">
-                                        <button type="submit" class="btn btn-success" id="showDialogBtn">Export</button>
-                                    </div>
-                                </div>
-                            </form>
+
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
@@ -170,6 +126,71 @@
                                 </tbody>
                             </table>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Filter data</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="forms-sample" method="GET" action="/filterGetPass">
+                                @csrf
+                                <div class="row mb-3">
+                                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tanggal awal</label>
+                                    <div class="col-sm-5">
+                                        <input type="date" class="form-control" id="nip" placeholder="tanggal awal"
+                                            required="required" value="{{ old('Tanggal') }}" name="sdate">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">tanggal akhir</label>
+                                    <div class="col-sm-5">
+                                        <input type="date" class="form-control" id="name" autocomplete="off"
+                                            placeholder="tanggal akhir" required="required" value="{{ old('Tanggal') }}"
+                                            name="edate">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-9 offset-sm-7">
+                                        <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                           <form class="forms-sample" method="GET" action="{{route('GetPAssProdi')}}">
+                                @csrf
+                                <div class="row mb-3">
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Prodi</label>
+                                <div class="col-sm-5">
+                                    <select class="form-select" name="prodi" id="prodi">
+                                        @foreach ($prodi as $p)
+                                            <option value="{{ $p }}">{{ $p }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-9 offset-sm-7">
+                                        <button type="submit" class="btn btn-primary" id="showDialogBtn">Filter</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-primary">Simpan Perubahan</button> --}}
                         </div>
                     </div>
                 </div>

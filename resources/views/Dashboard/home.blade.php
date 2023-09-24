@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('../assets/css/demo2/style.css') }}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{ asset('../assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('../assets/images/pei.png') }}" />
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -137,6 +137,7 @@
 
     <!-- Custom js for this page -->
     <script src="{{ asset('../assets/js/dashboard-dark.js') }}"></script>
+    <script src="{{asset('../../../assets/js/flatpickr.js')}}"></script>
     <!-- End custom js for this page -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

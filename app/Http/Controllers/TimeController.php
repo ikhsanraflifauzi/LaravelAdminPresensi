@@ -21,15 +21,15 @@ class TimeController extends Controller
     {
         // Ambil waktu masuk dan waktu pulang dari permintaan
         $masukInput = trim($request->input('in'));
+        $pulangInput = trim($request->input('out'));
 
-        // Parsing input menjadi objek Carbon
-        $masukDateTime = Carbon::createFromFormat('H:i:s', $masukInput);
 
 
         // Simpan dalam format waktu yang sesuai ke Firebase Firestore
         $timeCollection = app('firebase.firestore')->database()->collection('TimePic');
         $timeCollection->document('waktu_masuk')->set([
-            "masuk" => $masukDateTime->toDateTimeString(),
+            "masuk" => $masukInput,
+            "pulang"=> $pulangInput
 
         ]);
 
@@ -41,13 +41,13 @@ class TimeController extends Controller
         $pulangInput = trim($request->input('out'));
 
 
-        $pulangDateTime = Carbon::createFromFormat('H:i:s', $pulangInput);
 
-        // Simpan dalam format waktu yang sesuai ke Firebase Firestore
+
+
         $timeCollection = app('firebase.firestore')->database()->collection('TimePic');
         $timeCollection->document('waktu_pulang')->set([
 
-            "pulang" => $pulangDateTime->toDateTimeString()
+            "pulang" => $pulangInput
         ]);
 
         return redirect('/TimeDate');
@@ -56,9 +56,8 @@ class TimeController extends Controller
 
     public function readTime(){
         $data = app('firebase.firestore')->database()->collection('TimePic')->documents();
-        return view('timesettings.timeSet', [
-            'time'=>$data
-        ]);
+        return view('timesettings.timeSet', compact('data'));
 
     }
+
 }

@@ -54,6 +54,7 @@
                         data-input>
 
                 </div>
+            </div>
 
             </div>
             <div class="row">
@@ -64,18 +65,10 @@
                                 <h6 class="card-title mb-0"> Data Presensi</h6>
                                 <div class="row mb-3">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <button type="submit" class="btn btn-info btn-icon" id="showDialogBtn" data-toggle="modal" data-target="#myModal">
-                                            <i data-feather="filter"></i>
-                                        </button>
-                                        <form class="forms-sample" method="GET" action="/exportExcel">
-                                            <div class="btn-group btn-group-sm">
-                                                    <button type="submit" class="btn btn-success btn-icon"
-                                                        id="showDialogBtn"><i data-feather="email"></i></button></div>
-                                        </form>
-                                        <button onclick="window.location='{{ route('presensiPdf') }}'" class="btn btn-danger btn-icon">
-                                            <i data-feather="bookmark"></i>
-                                        </button>
-                                    </div>
+                                        <button type="submit" class="btn btn-info " id="showDialogBtn" data-toggle="modal" data-target="#myModal">Filter</button>
+                                        <button onclick="window.location='{{ route('presensiExcel') }}'" class="btn btn-success">Excel</button>
+                                        <button onclick="window.location='{{ route('presensiPdf') }}'" class="btn btn-danger">PDF</button>
+                                      </div>
                                 </div>
 
 

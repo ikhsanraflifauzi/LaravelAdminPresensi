@@ -17,6 +17,13 @@ class GetPassController extends Controller
 
         $mainCollectionName = 'Employee';
         $subCollectionName = 'GetPass';
+        $prodi = [
+            '-',
+            'Manufaktur',
+            'Mekatronika',
+            'Teknik Elektro',
+            'Teknologi Rekayasa Perangkat Lunak',
+        ];
 
         $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
         $documents = $mainCollection->documents();
@@ -39,11 +46,18 @@ class GetPassController extends Controller
             $data[] = $documentData;
         }
 
-        return view('DataGetPass.datagetpass', compact('data'));
+        return view('DataGetPass.datagetpass', compact('data', 'prodi'));
     }
     public function filterGetPass(Request $request) {
         $mainCollectionName = 'Employee';
         $subCollectionName = 'presensi';
+        $prodi = [
+            '-',
+            'Manufaktur',
+            'Mekatronika',
+            'Teknik Elektro',
+            'Teknologi Rekayasa Perangkat Lunak',
+        ];
 
         $startDate = $request->input('sdate');
         $endDate = $request->input('edate');
@@ -70,8 +84,48 @@ class GetPassController extends Controller
             $data[] = $documentData;
         }
 
-        return view('DataGetPass.datagetpass', compact('data'));
+        return view('DataGetPass.datagetpass', compact('data', 'prodi'));
     }
+
+    public function prodiFilterGetPass(Request $request) {
+        $mainCollectionName = 'Employee';
+        $subCollectionName = 'GetPass';
+        $prodi = [
+            '-',
+            'Manufaktur',
+            'Mekatronika',
+            'Teknik Elektro',
+            'Teknologi Rekayasa Perangkat Lunak',
+        ];
+
+        $selectedProdi = $request->input('prodi');
+
+        $mainCollection = app('firebase.firestore')->database()->collection($mainCollectionName);
+        $query = $mainCollection->where('prodi', "=", $selectedProdi)->orderBy('prodi');
+        $documents = $query->documents();
+
+        $data = [];
+        foreach ($documents as $document) {
+            $documentData = $document->data();
+            $documentId = $document->id();
+
+            $subCollection = app('firebase.firestore')->database()->collection($mainCollectionName)->document($documentId)->collection($subCollectionName);
+            $subDocuments = $subCollection->documents();
+
+            $documentData['GetPass'] = [];
+
+            foreach ($subDocuments as $subDocument) {
+                $documentData['GetPass'][] = $subDocument->data();
+            }
+
+            $data[] = $documentData;
+        }
+
+
+
+        return view('DataGetPass.datagetpass', compact('data', 'prodi', 'selectedProdi'));
+    }
+
     public function exportGetPass()
 {
     $mainCollectionName = 'Employee';

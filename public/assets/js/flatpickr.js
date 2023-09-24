@@ -4,7 +4,7 @@
 $(function() {
   'use strict';
 
-  // date picker 
+  // date picker
   if($('#flatpickr-date').length) {
     flatpickr("#flatpickr-date", {
       wrap: true,

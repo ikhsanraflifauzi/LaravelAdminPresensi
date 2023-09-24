@@ -10,7 +10,7 @@
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+	<title> Admin Presensi</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="{{asset('../../../assets/css/demo2/style.css')}}">
   <!-- End layout styles -->
 
-  <link rel="shortcut icon" href="{{asset('../../../assets/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('../../../assets/images/pei.png')}}" />
 </head>
 <body>
 	<div class="main-wrapper">
