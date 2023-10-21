@@ -75,24 +75,24 @@
                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Waktu masuk</label>
                                 <div class="col-sm-5">
                                     <div class="input-group flatpickr" id="flatpickr-time">
-                                        <input type="text" class="form-control" data-input id="nip"
-                                            placeholder="waktu masuk" required="required" value="{{ old('masuk') }}"
-                                            name="in">
-                                        <span class="input-group-text input-group-addon" data-toggle><i
-                                                data-feather="clock"></i></span>
+                                        <input type="text" class="form-control" data-input placeholder="waktu masuk"
+                                            required value="{{ old('masuk') }}" name="in">
+                                        <span class="input-group-text input-group-addon">
+                                            <i data-feather="clock"></i>
+                                        </span>
                                     </div>
-
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Waktu pulang</label>
-                                    <div class="col-sm-5">
-                                        <div class="input-group flatpickr" id="flatpickr-time">
-                                            <input type="text" class="form-control" data-input id="nip"
-                                                placeholder="waktu pulang" required="required" value="{{ old('pulang') }}"
-                                                name="out">
-                                            <span class="input-group-text input-group-addon" data-toggle><i
-                                                    data-feather="clock"></i></span>
-                                        </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Waktu pulang</label>
+                                <div class="col-sm-5">
+                                    <div class="input-group flatpickr" id="flatpickr-time">
+                                        <input type="text" class="form-control" data-input placeholder="waktu pulang"
+                                            required value="{{ old('pulang') }}" name="out">
+                                        <span class="input-group-text input-group-addon">
+                                            <i data-feather="clock"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +111,8 @@
                         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
                             <h6 class="card-title mb-0"> Data User</h6>
                             <div class="dropdown mb-2">
-                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
+                                <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                                 </a>
                             </div>

@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="{{asset('../../../assets/css/demo2/style.css')}}">
   <!-- End layout styles -->
 
-  <link rel="shortcut icon" href="{{asset('../../../assets/images/pei.png')}}" />
+  <link rel="shortcut icon" href="{{asset('../../../assets/images/pei.jpg')}}" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -42,13 +42,14 @@
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
                   <div class="auth-side-wrapper">
+                    <img src="{{asset('../../../assets/images/pei.jpg')}}"width="219" height="465">
 
                   </div>
                 </div>
                 <div class="col-md-8 ps-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="#" class="noble-ui-logo logo-light d-block mb-2">Admin<span>Presensi</span></a>
-                    <h5 class="text-muted fw-normal mb-4">S</h5>
+                    <h5 class="text-muted fw-normal mb-4"></h5>
                     <form class="forms-sample" method="POST" action="{{ route('login') }}">
                         @csrf
                       <div class="mb-3">

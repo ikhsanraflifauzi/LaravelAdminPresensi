@@ -215,7 +215,7 @@ public function exportPresensi()
 
     // Header kolom
     $header = [
-        'NIP', 'Nama', 'Jabatan', 'Prodi', 'Tanggal', 'Check in', 'Status', 'Check out'
+        'NIP', 'Nama', 'Jabatan', 'Prodi', 'Tanggal', 'kegiatan','Check in', 'Status', 'Check out', 'JamKerja(menit)','pulang cepat'
     ];
     $column = 1;
     foreach ($header as $item) {
@@ -232,9 +232,12 @@ public function exportPresensi()
             $sheet->setCellValueByColumnAndRow(3, $row, $documentData['jabatan']);
             $sheet->setCellValueByColumnAndRow(4, $row, $documentData['prodi']);
             $sheet->setCellValueByColumnAndRow(5, $row, \Carbon\Carbon::parse($presensi['tanggal'])->format('Y m d'));
-            $sheet->setCellValueByColumnAndRow(6, $row, \Carbon\Carbon::parse($presensi['check in']['tanggal'])->format('H:i:s'));
-            $sheet->setCellValueByColumnAndRow(7, $row, $presensi['check in']['status']);
-            $sheet->setCellValueByColumnAndRow(8, $row, isset($presensi['check out']['tanggal']) ? \Carbon\Carbon::parse($presensi['check out']['tanggal'])->format('H:i:s') : '');
+            $sheet->setCellValueByColumnAndRow(6, $row, isset($presensi['check in']['kegiatan']) ? $presensi['check in']['kegiatan']: 'Tidak ada kegiatan');
+            $sheet->setCellValueByColumnAndRow(7, $row, \Carbon\Carbon::parse($presensi['check in']['tanggal'])->format('H:i:s'));
+            $sheet->setCellValueByColumnAndRow(8, $row, $presensi['check in']['status']);
+            $sheet->setCellValueByColumnAndRow(9, $row, isset($presensi['check out']['tanggal']) ? \Carbon\Carbon::parse($presensi['check out']['tanggal'])->format('H:i:s') : '');
+            $sheet->setCellValueByColumnAndRow(10, $row, isset($presensi['check out']['Jamkerja']) ? $presensi['check out']['Jamkerja']: ' 0 menit');
+            $sheet->setCellValueByColumnAndRow(11, $row, isset($presensi['check out']['izin']) ? $presensi['check out']['izin']: ' Tanpa Keterangan');
 
             $row++;
         }

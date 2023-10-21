@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('../assets/css/demo2/style.css') }}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{ asset('../assets/images/pei.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('../assets/images/pei.jpg') }}" />
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

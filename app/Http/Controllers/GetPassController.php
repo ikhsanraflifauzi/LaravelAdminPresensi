@@ -50,7 +50,7 @@ class GetPassController extends Controller
     }
     public function filterGetPass(Request $request) {
         $mainCollectionName = 'Employee';
-        $subCollectionName = 'presensi';
+        $subCollectionName = 'GetPass';
         $prodi = [
             '-',
             'Manufaktur',
@@ -105,19 +105,21 @@ class GetPassController extends Controller
         $documents = $query->documents();
 
         $data = [];
+
         foreach ($documents as $document) {
             $documentData = $document->data();
             $documentId = $document->id();
 
-            $subCollection = app('firebase.firestore')->database()->collection($mainCollectionName)->document($documentId)->collection($subCollectionName);
+            $subCollection = $mainCollection->document($documentId)->collection($subCollectionName);
             $subDocuments = $subCollection->documents();
 
-            $documentData['GetPass'] = [];
+            $getpassData = [];
 
             foreach ($subDocuments as $subDocument) {
-                $documentData['GetPass'][] = $subDocument->data();
+                $getpassData[] = $subDocument->data();
             }
 
+            $documentData['GetPass'] = $getpassData;
             $data[] = $documentData;
         }
 

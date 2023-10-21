@@ -83,9 +83,12 @@
                                             <th class="pt-0">Jabatan</th>
                                             <th class="pt-0">Prodi</th>
                                             <th class="pt-0">Tanggal</th>
+                                            <th class="pt-0">Kegiatan</th>
                                             <th class="pt-0">Check in</th>
                                             <th class="pt-0">Status</th>
                                             <th class="pt-0">Check out</th>
+                                            <th class="pt-0"><p> jam kerja(menit)</p></th>
+                                            <th class="pt-0">pulang cepat</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,6 +110,11 @@
                                                     <td>{{ \Carbon\Carbon::parse($presensi['tanggal'])->format('d M Y') }}
                                                     </td>
                                                     <td>
+                                                        @if (isset($presensi['check in']['kegiatan']))
+                                                            {{ $presensi['check in']['kegiatan'] }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
                                                         @if (isset($presensi['check in']['tanggal']))
                                                             {{ \Carbon\Carbon::parse($presensi['check in']['tanggal'])->format('H:i:s') }}
                                                         @endif
@@ -119,6 +127,16 @@
                                                     <td>
                                                         @if (isset($presensi['check out']['tanggal']))
                                                             {{ \Carbon\Carbon::parse($presensi['check out']['tanggal'])->format('H:i:s') }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if (isset($presensi['check out']['Jamkerja']))
+                                                            {{($presensi['check out']['Jamkerja'])}}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if (isset($presensi['check out']['izin']))
+                                                            {{ ($presensi['check out']['izin'])}}
                                                         @endif
                                                     </td>
                                                 </tr>
